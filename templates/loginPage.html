@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block body %}
+
+<div class="container" id="loginModal">
+    <div class="container p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Login</h1>
+    </div>
+    <div class="container p-5 pt-0">
+        <form method="post" action="/loginPage/">
+            {% csrf_token %}
+            <div class="form-floating mb-3 my-2">
+                <input type="text" class="form-control rounded-3" id="loginusername" name="loginusername"
+                    placeholder="Enter username" fdprocessedid="loginusername">
+                <label for="loginusername">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-3" name="loginpassword" id="loginpassword"
+                    placeholder="Password" fdprocessedid="loginpassword">
+                <label for="loginpassword">Password</label>
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="mb-2 my-4 btn btn-lg rounded-3 btn-primary" type="submit"
+                fdprocessedid="loginbtn">Login</button>
+            <hr class="my-4">
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

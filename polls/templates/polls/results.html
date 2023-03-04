@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Results{% endblock title %}
+
+{% block body %}
+
+<!-- Results -->
+<div class="container my-4">
+    <h1>Results</h1><br>
+    <h2>{{question.ques_type}} : {{ question.question_text }}</h2><br>
+    <h5>
+        <ul>
+            {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li><br>
+            {% endfor %}
+        </ul>
+    </h5>
+
+    <a href="{% url 'polls:showQues' %}">
+        <h6>Back to Questions Page</h6>
+    </a>
+</div>
+
+{% endblock body %}

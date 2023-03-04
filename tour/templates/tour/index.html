@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}User Dashboard{% endblock title %}
+
+{% block body %}
+{% if user.is_authenticated %}
+
+<div class="container my-3 mb-3">
+    <h1>User Dashboard</h1>
+    <h4>Welcome {{request.user}}
+    </h4>
+</div>
+
+<div class="container my-3 mb-3">
+    <a class="btn btn-outline-success btn-lg" href="/tour/polls/" role="button">Create New Tour</a>
+</div>
+{% else %}
+<div class="container my-3 mb-3">
+    <h4>User not authenticated, login and try again.</h4>
+</div>
+
+{% endif %}
+
+<!-- Cards  -->
+<div class="container my-4">
+    <div class=" d-flex flex-wrap justify-content-start">
+        {% for tour in tour_list %}
+        <div class="d-inline-block mx-2" style="width: 18rem;">
+            <div class="card bg-info">
+                <div class="card-body">
+                    <h4 class="card-title">{{tour.tour_name}}</h4>
+                    <p class="card-text"><b>Created by : </b>{{tour.created_by}}</p>
+                    <p class="card-text"><strong>{{tour.desc}}</strong></p>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'polls:showQues' %}" class="btn btn-primary">View Details</a>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'polls:index' %}" class="btn btn-primary">Add Polls</a>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'polls:iti_page' %}" class="btn btn-lg btn-success">Generate Itinerary Screen</a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+
+{% endblock body %}

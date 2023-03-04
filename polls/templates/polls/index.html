@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}New Tour{% endblock title %}
+
+{% block body %}
+
+<!-- Tour Details -->
+<form method="post">
+    {% csrf_token %}
+    <div class="container my-4">
+        <h3>New Tour</h3>
+        <div class="form-floating mb-3 my-4">
+            <input type="text" class="form-control" name="tour_name" id="tour_name" placeholder="Tour Name">
+            <label for="tour_name">Tour Name</label>
+        </div>
+        <div class="form-floating mb-3 my-4">
+            <textarea class="form-control" id="tour_desc" name="tour_desc" style="height: 100px"
+                placeholder="Tour Description"></textarea>
+            <label for="Tour Description">Tour Description</label>
+        </div>
+    </div>
+
+    <!-- Adding members -->
+    <div class="container my-4">
+        <h3>Add Users</h3><br>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Selected</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in user_list %}
+                <tr>
+                    <td>{{user}}</td>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{user.id}}" name="boxes">
+                        </div>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <br>
+        <button class="mb-4 btn rounded-3 btn-primary" name="create-tour" type="submit"
+            fdprocessedid="create-tour">Create
+            Tour</button>
+    </div>
+</form>
+
+<!-- Adding new question -->
+<div class="container my-4">
+    <div class="container my-4">
+        <h5>New Question</h5>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-floating mb-3 my-2">
+                <input type="text" class="form-control" name="tour" id="tour" placeholder="Tour Name">
+                <label for="tour">Tour Name</label>
+            </div>
+            <div class="form-floating my-2 mb-3">
+                <input type="text" class="form-control" id="question" name="question" placeholder="question">
+                <label for="question">Question</label>
+            </div>
+            <div class="mb-3">
+                <select id="ques_type" name="ques_type" class="form-select" aria-label="Default select example">
+                    <option selected>Choose a question type</option>
+                    <option value="Venue">Venue</option>
+                    <option value="Date">Date</option>
+                    <option value="Duration">Duration</option>
+                    <option value="Activities">Activities</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-floating mb-1">
+                <input type="text" class="form-control" id="choice1" name="choice1" placeholder="choice1">
+                <label for="choice1">Choice 1</label>
+            </div>
+            <div class="form-floating mb-1">
+                <input type="text" class="form-control" id="choice2" name="choice2" placeholder="choice2">
+                <label for="choice2">Choice 2</label>
+            </div>
+            <div class="form-floating mb-1">
+                <input type="text" class="form-control" id="choice3" name="choice3" placeholder="choice3">
+                <label for="choice3">Choice 3</label>
+            </div>
+            <button class="mb-2 my-4 btn rounded-3 btn-primary" name="add-ques" type="submit"
+                fdprocessedid="add-ques">Add
+                Question</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/tour/" class="btn btn-lg rounded-3 btn-outline-success" role="button">Back
+        to Dashboard</a>
+</div>
+{% endblock body %}

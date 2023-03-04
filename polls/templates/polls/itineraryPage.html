@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Generate Itinerary Screen{% endblock title %}
+
+{% block body %}
+
+<!-- Enter name of tour -->
+<div class="container my-4">
+    <h4>Generate Itinerary</h4>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3 my-4">
+            <input type="text" class="form-control" name="search_iti" id="search_iti" placeholder="search_iti">
+            <label for="search_iti">Tour Name</label>
+        </div>
+        <button class="mb-2 my-2 btn rounded-3 btn-primary" name="search-btn" type="submit"
+            fdprocessedid="search-btn">Search</button>
+    </form>
+</div>
+
+<!-- Selected Choices  -->
+{%if max_date%}
+<div class="container my-4">
+    <h3>Selected Choices : </h3><br>
+    <h6><strong>Chosen Departure Date: </strong> {{max_date.choice_text}}</h6><br>
+    <h6><strong>Chosen Venue: </strong> {{max_venue.choice_text}}</h6><br>
+</div>
+
+<!-- Cards  -->
+<div class="container my-4">
+    <div class=" d-flex flex-wrap justify-content-start">
+        {% for day, date in itinerary%}
+        <div class="d-inline-block mx-2" style="width: 18rem;">
+            <div class="card bg-warning border-success">
+                <div class="card-body">
+                    <h3 class="card-title text-center text-danger"> Day {{ day }}</h3>
+                    <p class="card-text"><strong>{{ date }}</strong></p>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Roles and Responsibilities  -->
+<div class="container my-4">
+    <h5><strong>Responsibilities : </strong></h5>
+    <ul>
+        {%for choice in max_other_list%}
+        <li>{{choice.choice_text}}</li>
+        {%endfor%}
+    </ul>
+</div>
+
+<!-- Activities -->
+<div class="container my-4">
+    <h5><strong>Activities : </strong></h5>
+    <ol>
+        {%for choice in max_activities%}
+        <li>{{choice.choice_text}}</li>
+        {%endfor%}
+    </ol>
+</div>
+
+{%endif%}
+
+{% endblock body %}

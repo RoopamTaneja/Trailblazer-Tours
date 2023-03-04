@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Update username{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div class="container p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Update username</h1>
+    </div>
+    <div class="container p-5 pt-0">
+        <form method="post" enctype="multipart/form-data">
+            <!-- action="/loginPage/"> -->
+            {% csrf_token %}
+
+            {{ u_form }}
+            <br>
+            <div>
+                <button class="mb-2 my-4 btn btn-lg rounded-3 btn-primary" type="submit"
+                    fdprocessedid="update_username">Update username</button>
+                <hr class="my-4">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

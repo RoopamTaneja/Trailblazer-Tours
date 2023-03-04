@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<!-- <html lang="en" data-bs-theme="dark"> -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar bg-danger navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light" href="/index"><h4>Trailblazer Tours</h4></a>
+            <div class="my-2">
+                <button class="navbar-toggler bg-warning border border-dark" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link rounded-2 text-light" aria-current="page" href="/index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded-2 text-light" href="/about">About</a>
+                    </li>
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            My Account
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item rounded-2 " href="/tour">Dashboard</a></li>
+                            <li><a class="dropdown-item rounded-2" href="/tour/profile">User Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item rounded-2" href="/logoutPage">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded-2 text-light" href="/tour/contact">Contact Us</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+                <div class="mx-2 my-2">
+                    <a href="/loginPage" class="btn btn-info">Login</a>
+                    <a href="/signupPage" class="btn btn-info">SignUp</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+    {% block body %}{% endblock body %}
+
+    <!-- Footer -->
+    <footer>
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>© 2023 Trailblazer Tours, Inc.</p>
+            <p> All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

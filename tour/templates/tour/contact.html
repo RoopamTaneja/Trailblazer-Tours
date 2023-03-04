@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block body %}
+
+<!-- Contact Us Form  -->
+<div class="container my-4">
+    <h2>Contact Us</h2>
+    <form method="post" action="#">
+        {% csrf_token %}
+        <div class="form-floating mb-3 my-4">
+            <input type="text" class="form-control rounded-3" id="name" placeholder="Enter name" name="name">
+            <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="phone" class="form-control rounded-3" id="phone" name="phone" placeholder="Enter no">
+            <label for="phone">Mobile no</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-3" id="email" name="email" placeholder="Enter email">
+            <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" id="desc" name="desc" style="height: 100px"
+                placeholder="Enter description"></textarea>
+            <label for="floatingTextarea2">Concerns</label>
+        </div>
+        <button class="mb-2 my-4 btn btn-lg rounded-3 btn-primary" type="submit"
+            fdprocessedid="submitbtn">Submit</button>
+        <hr class="my-4">
+    </form>
+</div>
+
+{% endblock body %}

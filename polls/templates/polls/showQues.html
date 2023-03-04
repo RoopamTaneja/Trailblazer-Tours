@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Show Polls{% endblock title %}
+
+{% block body %}
+
+<!-- Enter name of tour -->
+<div class="container my-4">
+    <h4>Show created tours</h4>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3 my-4">
+            <input type="text" class="form-control" name="search_tour" id="search_tour" placeholder="search_tour">
+            <label for="search_tour">Tour Name</label>
+        </div>
+        <button class="mb-2 my-2 btn rounded-3 btn-primary" name="search-btn" type="submit"
+            fdprocessedid="search-btn">Search</button>
+    </form>
+</div>
+
+<!-- Added Users -->
+<div class="container my-2">
+    <h3>Created by :</h3>
+    <h6>{{tour.created_by}}</h6><br>
+    <h5>Added Users</h5>
+    <ul>
+        {% for user in userlist %}
+        <li>{{user.username}}</li>
+        {%endfor%}
+    </ul>
+</div>
+
+<!-- List of questions in tour-->
+<div class="container my-2">
+    {% if question_list and tour %}
+    <h3 class="my-4">List of questions of tour : {{tour.tour_name}}</h3>
+    <ul class="list-group">
+        {% for question in question_list %}
+        <li class="list-group-item bg-success">
+            <a href="{% url 'polls:detail' question.id %}" class="link-warning">
+                <h5>{{question.ques_type}} : {{ question.question_text }}</h5>
+            </a>
+            <a class="btn btn-sm btn-info" href="{% url 'polls:editQues' question.id %}" role="button">Edit</a>
+            <a class="btn btn-sm btn-danger " href="{% url 'polls:results' question.id %}" role="button">Results</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No data is available.</p>
+    {% endif %}
+</div><br>
+
+<div>
+    <a href="/tour/" class="btn btn-lg rounded-3 btn-outline-success" role="button">Back
+        to Dashboard</a>
+</div>
+{% endblock body %}

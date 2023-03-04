@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Polls{% endblock title %}
+
+{% block body %}
+<!-- Edit question -->
+{% if q_form %}
+<div class="container">
+    <div class="container p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">{{edit}}</h1>
+    </div>
+    <div class="container p-5 pt-0">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ q_form }}
+            <br>
+            <div>
+                <button class="mb-2 my-4 btn rounded-3 btn-primary" name="update_ques" type="submit"
+                    fdprocessedid="update_ques">Update question</button>
+                <button class="mb-2 my-4 btn rounded-3 btn-primary" name="delete_ques" type="submit"
+                    fdprocessedid="delete_ques">Delete question</button>
+                <hr>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+<!-- Edit choices  -->
+<div class="container">
+    {% if choice_list %}
+    <h1 class="fw-bold mb-2 fs-2">Edit Choices</h1>
+    {% for choice in choice_list %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="choice_edit{{ forloop.counter }}" class="form-label">{{ choice.choice_text }}</label>
+            <input type="text" class="form-control w-50" name="choice_edit{{ forloop.counter }}"
+                id="choice_edit{{ forloop.counter }}" placeholder="Add new choice text">
+        </div>
+
+        {% endfor %}
+        <button class="mb-2 my-4 btn rounded-3 btn-primary" name="choice_edit" type="submit"
+            fdprocessedid="choice_edit">
+            Edit Choices
+        </button>
+        <!-- Must have the button inside form tag in order to submit -->
+    </form>
+</div>
+{%endif%}
+<br>
+<!-- Back to questions page  -->
+<div my-4>
+    <a href="{% url 'polls:showQues' %}" class="btn btn-lg rounded-3 btn-outline-warning" role="button">Back
+        to Questions Page</a>
+</div>
+{% endblock body %}

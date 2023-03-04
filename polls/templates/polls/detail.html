@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Voting Page{% endblock title %}
+
+{% block body %}
+
+<!-- Voting form  -->
+<div class="container my-4">
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h2>{{question.ques_type}} : {{ question.question_text }}</h2>
+            </legend>
+            <br>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            {% for choice in question.choice_set.all %}
+            <div class="form-check my-2">
+                <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}"
+                    value="{{ choice.id }}">
+                <label class="form-check-label" for="choice{{ forloop.counter }}">
+                    <h5>{{ choice.choice_text }}</h5>
+                </label><br>
+            </div>
+            {% endfor %}
+        </fieldset>
+        <button class="mb-2 my-4 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="submitbtn">Vote</button>
+    </form>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<div class="container my-4">
+    <h2> User Profile </h2>
+</div>
+<div class="container my-4 mb-3">
+    <div class="card" style="width: 18rem;">
+        <img width="200" src="{{ user.profile.dp.url  }}" class="card-img-top" alt="user_dp">
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5>Username : </h5>{{user.username}}
+            </li>
+            <li class="list-group-item">
+                <h5>Email : </h5>{{user.email}}
+            </li>
+        </ul>
+        <div class="card-body">
+            <a href="/tour/profile/update_username" class="btn btn-primary mb-1" role="button">Update Username</a>
+            <a href="/tour/profile/update_dp" class="btn btn-primary" role="button">Update Profile Picture</a>
+        </div>
+    </div>
+</div>
+<br>
+
+{% else %}
+<div class="container my-3 mb-3">
+    <h4>User not authenticated, login and try again.</h4>
+</div>
+<br>
+
+{% endif %}
+{% endblock body %}
