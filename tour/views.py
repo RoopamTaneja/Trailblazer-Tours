@@ -24,6 +24,7 @@ def contact(request):
         contact = Contact(name=name, phone=phone, email=email,
                           desc=desc, date=datetime.today())
         contact.save()
+        messages.success(request, "Successfully Submitted!")
     return render(request, 'tour/contact.html')
 
 
@@ -42,7 +43,6 @@ def update_dp(request):
         if dp_form.is_valid():
             dp_form.save()
             messages.success(request, "Successfully Updated")
-            return redirect('update_dp')
 
     else:
         dp_form = DP_uploader(instance=request.user.profile)
@@ -58,7 +58,6 @@ def update_username(request):
         if u_form.is_valid():
             u_form.save()
             messages.success(request, "Successfully Updated")
-            return redirect('update_username')
 
     else:
         u_form = username_updater(instance=request.user)
